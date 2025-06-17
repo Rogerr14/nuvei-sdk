@@ -1,4 +1,4 @@
-package com.example.nuvei_sdk;
+package com.nuvei.nuvei_sdk;
 
 import android.content.Context;
 

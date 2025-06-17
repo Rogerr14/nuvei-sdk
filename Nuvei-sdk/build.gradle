@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.nuvei_sdk'
+    namespace 'com.nuvei.nuvei_sdk'
     compileSdk 34
 
     defaultConfig {

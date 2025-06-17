@@ -1,11 +1,11 @@
-package com.example.nuvei_sdk.interceptorHttp;
+package com.nuvei.nuvei_sdk.interceptorHttp;
 
-import static com.example.nuvei_sdk.helpers.NuveiUtils.SERVER_DEV_URL;
-import static com.example.nuvei_sdk.helpers.NuveiUtils.SERVER_PROD_URL;
+import static com.nuvei.nuvei_sdk.helpers.NuveiUtils.SERVER_DEV_URL;
+import static com.nuvei.nuvei_sdk.helpers.NuveiUtils.SERVER_PROD_URL;
 
 import android.content.Context;
 
-import com.example.nuvei_sdk.helpers.NuveiUtils;
+import com.nuvei.nuvei_sdk.helpers.NuveiUtils;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

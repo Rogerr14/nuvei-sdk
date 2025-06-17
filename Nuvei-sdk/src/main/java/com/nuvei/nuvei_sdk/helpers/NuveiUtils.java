@@ -1,4 +1,4 @@
-package com.example.nuvei_sdk.helpers;
+package com.nuvei.nuvei_sdk.helpers;
 
 import android.util.Base64;
 import org.apache.commons.codec.binary.Hex;

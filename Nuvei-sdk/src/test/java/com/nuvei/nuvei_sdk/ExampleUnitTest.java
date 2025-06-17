@@ -1,4 +1,4 @@
-package com.example.nuveisdk;
+package com.nuvei.nuvei_sdk;
 
 import org.junit.Test;
 
