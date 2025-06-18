@@ -5,6 +5,7 @@ import static com.nuvei.nuvei_sdk.helpers.NuveiUtils.SERVER_PROD_URL;
 
 import android.content.Context;
 
+import com.nuvei.nuvei_sdk.Nuvei;
 import com.nuvei.nuvei_sdk.helpers.NuveiUtils;
 
 import okhttp3.OkHttpClient;
@@ -17,10 +18,10 @@ public class InterceptorHttp {
 
     static OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
-    public static  Retrofit getClient(Context mContext, boolean developer_mode, String CLIENT_CODE_APP, String CLIENT_KEY_APP){
+    public static  Retrofit getClient(Context mContext){
         if(retrofit == null){
             String URL_BASE;
-            if(developer_mode){
+            if(Nuvei.isTestMode()){
                 URL_BASE = SERVER_DEV_URL;
             }else{
                 URL_BASE = SERVER_PROD_URL;
@@ -28,7 +29,7 @@ public class InterceptorHttp {
 
             builder.addInterceptor(chain -> {
                 Request request = chain.request().newBuilder().addHeader("Content-Type", "application/json")
-                        .addHeader("Auth_Token", NuveiUtils.getAuthToken(CLIENT_KEY_APP, CLIENT_CODE_APP))
+                        .addHeader("Auth_Token", NuveiUtils.getAuthToken(Nuvei.getClientKey(), Nuvei.getClientCode()))
                         .build();
                 return chain.proceed(request);
             });

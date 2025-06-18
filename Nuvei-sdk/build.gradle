@@ -26,7 +26,7 @@ android {
 }
 
 dependencies {
-
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation libs.appcompat
     implementation libs.material
     testImplementation libs.junit
@@ -36,4 +36,5 @@ dependencies {
     implementation libs.retrofit2
     implementation libs.gson
     implementation libs.commons.codec
+    implementation(files("libs/kount-data-colllector-4.3.5.jar"))
 }

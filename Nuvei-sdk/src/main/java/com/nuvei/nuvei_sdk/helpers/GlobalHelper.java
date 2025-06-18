@@ -1,10 +1,15 @@
 package com.nuvei.nuvei_sdk.helpers;
 
+import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.kount.api.DataCollector;
+import com.nuvei.nuvei_sdk.Nuvei;
 import com.nuvei.nuvei_sdk.models.CardModel;
 import com.nuvei.nuvei_sdk.models.CardModel.CardBrand;
 
@@ -13,6 +18,7 @@ import java.security.MessageDigest;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Utility class for common text-related operations in the Paymentez Android SDK.
@@ -290,6 +296,44 @@ public  class GlobalHelper {
             year = Integer.parseInt(String.format(Locale.US, "%s%02d", prefix, year));
         }
         return year;
+    }
+
+
+
+    public  static String getSessionId(Context context){
+        String session_ID = UUID.randomUUID().toString();
+        final String device_session_ID =session_ID.replace("-", "");
+        final String MERCHANT_ID = "500005";
+        final DataCollector dataCollector = com.kount.api.DataCollector.getInstance();
+        dataCollector.setDebug(Nuvei.isTestMode());
+        dataCollector.setContext(context);
+        dataCollector.setMerchantID(MERCHANT_ID);
+        if (Nuvei.isTestMode()) {
+            dataCollector.setEnvironment(DataCollector.ENVIRONMENT_TEST);
+        } else {
+            dataCollector.setEnvironment(DataCollector.ENVIRONMENT_PRODUCTION);
+        }
+        dataCollector.setLocationCollectorConfig(DataCollector.LocationConfig.COLLECT);
+
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            public void run() {
+                dataCollector.collectForSession(device_session_ID, new com.kount.api.DataCollector.CompletionHandler() {
+                    @Override
+                    public void completed(String s) {
+
+                    }
+
+                    @Override
+                    public void failed(String s, final DataCollector.Error error) {
+
+                    }
+
+                });
+            }
+        });
+
+
+    return device_session_ID;
     }
 
 }

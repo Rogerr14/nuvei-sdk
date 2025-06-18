@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.Size;
 import androidx.annotation.StringDef;
 
+import com.nuvei.nuvei_sdk.builders.CardBuilder;
 import com.nuvei.nuvei_sdk.R;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -27,7 +28,7 @@ import java.util.Map;
 /**
  * A model object representing a Card in the Paymentez Android SDK.
  */
-public class CardModel extends JsonModel  {
+public class CardModel extends JsonModel {
 
     @Retention(RetentionPolicy.SOURCE)
     @StringDef({AMERICAN_EXPRESS, DISCOVER, JCB, DINERS_CLUB, VISA, MASTERCARD, UNKNOWN, EXITO, ALKOSTO})
@@ -140,94 +141,34 @@ public class CardModel extends JsonModel  {
     private String addressZipCheck;
     @NonNull private transient List<String> loggingTokens = new ArrayList<>();
 
-    public static class Builder {
-        private String number;
-        private Integer expMonth;
-        private Integer expYear;
-        private String cvc;
-        private String name;
-        private String addressLine1;
-        private String addressLine2;
-        private String addressCity;
-        private String addressState;
-        private String addressZip;
-        private String addressCountry;
-        private String brand;
-        private String funding;
-        private String last4;
-        private String fingerprint;
-        private String country;
-        private String currency;
-        private String customer;
-        private String cvcCheck;
-        private String id;
-        private String bin;
-        private String status;
-        private String token;
-        private String transactionReference;
-        private String message;
+    
 
-        public Builder(@Nullable String number, @IntRange(from = 1, to = 12) Integer expMonth,
-                       @IntRange(from = 0) Integer expYear, @Nullable String cvc) {
-            this.number = number;
-            this.expMonth = expMonth;
-            this.expYear = expYear;
-            this.cvc = cvc;
-        }
-
-        public Builder name(String name) { this.name = name; return this; }
-        public Builder addressLine1(String address) { this.addressLine1 = address; return this; }
-        public Builder addressLine2(String address) { this.addressLine2 = address; return this; }
-        public Builder addressCity(String city) { this.addressCity = city; return this; }
-        public Builder addressState(String state) { this.addressState = state; return this; }
-        public Builder addressZip(String zip) { this.addressZip = zip; return this; }
-        public Builder addressCountry(String country) { this.addressCountry = country; return this; }
-        public Builder brand(@CardBrand String brand) { this.brand = brand; return this; }
-        public Builder funding(@FundingType String funding) { this.funding = funding; return this; }
-        public Builder last4(String last4) { this.last4 = last4; return this; }
-        public Builder fingerprint(String fingerprint) { this.fingerprint = fingerprint; return this; }
-        public Builder country(String country) { this.country = country; return this; }
-        public Builder currency(String currency) { this.currency = currency; return this; }
-        public Builder customer(String customer) { this.customer = customer; return this; }
-        public Builder cvcCheck(String cvcCheck) { this.cvcCheck = cvcCheck; return this; }
-        public Builder id(String id) { this.id = id; return this; }
-        public Builder bin(String bin) { this.bin = bin; return this; }
-        public Builder status(String status) { this.status = status; return this; }
-        public Builder token(String token) { this.token = token; return this; }
-        public Builder transactionReference(String transactionReference) { this.transactionReference = transactionReference; return this; }
-        public Builder message(String message) { this.message = message; return this; }
-
-        public CardModel build() {
-            return new CardModel(this);
-        }
-    }
-
-    private CardModel(Builder builder) {
-        this.number = GlobalHelper.nullIfBlank(normalizeCardNumber(builder.number));
-        this.expiryMonth = builder.expMonth;
-        this.expiryYear = builder.expYear;
-        this.cvc = GlobalHelper.nullIfBlank(builder.cvc);
-        this.holderName = GlobalHelper.nullIfBlank(builder.name);
-        this.addressLine1 = GlobalHelper.nullIfBlank(builder.addressLine1);
-        this.addressLine2 = GlobalHelper.nullIfBlank(builder.addressLine2);
-        this.addressCity = GlobalHelper.nullIfBlank(builder.addressCity);
-        this.addressState = GlobalHelper.nullIfBlank(builder.addressState);
-        this.addressZip = GlobalHelper.nullIfBlank(builder.addressZip);
-        this.addressCountry = GlobalHelper.nullIfBlank(builder.addressCountry);
-        this.last4 = GlobalHelper.nullIfBlank(builder.last4) == null ? getLast4() : builder.last4;
-        this.type = asCardBrand(builder.brand) == null ? getType() : builder.brand;
-        this.fingerprint = GlobalHelper.nullIfBlank(builder.fingerprint);
-        this.funding = asFundingType(builder.funding);
-        this.country = GlobalHelper.nullIfBlank(builder.country);
-        this.currency = GlobalHelper.nullIfBlank(builder.currency);
-        this.customerId = GlobalHelper.nullIfBlank(builder.customer);
-        this.cvcCheck = GlobalHelper.nullIfBlank(builder.cvcCheck);
-        this.id = GlobalHelper.nullIfBlank(builder.id);
-        this.bin = GlobalHelper.nullIfBlank(builder.bin);
-        this.status = GlobalHelper.nullIfBlank(builder.status);
-        this.token = GlobalHelper.nullIfBlank(builder.token);
-        this.transactionReference = GlobalHelper.nullIfBlank(builder.transactionReference);
-        this.message = GlobalHelper.nullIfBlank(builder.message);
+    public CardModel(CardBuilder CardBuilder) {
+        this.number = GlobalHelper.nullIfBlank(normalizeCardNumber(CardBuilder.number));
+        this.expiryMonth = CardBuilder.expMonth;
+        this.expiryYear = CardBuilder.expYear;
+        this.cvc = GlobalHelper.nullIfBlank(CardBuilder.cvc);
+        this.holderName = GlobalHelper.nullIfBlank(CardBuilder.name);
+        this.addressLine1 = GlobalHelper.nullIfBlank(CardBuilder.addressLine1);
+        this.addressLine2 = GlobalHelper.nullIfBlank(CardBuilder.addressLine2);
+        this.addressCity = GlobalHelper.nullIfBlank(CardBuilder.addressCity);
+        this.addressState = GlobalHelper.nullIfBlank(CardBuilder.addressState);
+        this.addressZip = GlobalHelper.nullIfBlank(CardBuilder.addressZip);
+        this.addressCountry = GlobalHelper.nullIfBlank(CardBuilder.addressCountry);
+        this.last4 = GlobalHelper.nullIfBlank(CardBuilder.last4) == null ? getLast4() : CardBuilder.last4;
+        this.type = asCardBrand(CardBuilder.brand) == null ? getType() : CardBuilder.brand;
+        this.fingerprint = GlobalHelper.nullIfBlank(CardBuilder.fingerprint);
+        this.funding = asFundingType(CardBuilder.funding);
+        this.country = GlobalHelper.nullIfBlank(CardBuilder.country);
+        this.currency = GlobalHelper.nullIfBlank(CardBuilder.currency);
+        this.customerId = GlobalHelper.nullIfBlank(CardBuilder.customer);
+        this.cvcCheck = GlobalHelper.nullIfBlank(CardBuilder.cvcCheck);
+        this.id = GlobalHelper.nullIfBlank(CardBuilder.id);
+        this.bin = GlobalHelper.nullIfBlank(CardBuilder.bin);
+        this.status = GlobalHelper.nullIfBlank(CardBuilder.status);
+        this.token = GlobalHelper.nullIfBlank(CardBuilder.token);
+        this.transactionReference = GlobalHelper.nullIfBlank(CardBuilder.transactionReference);
+        this.message = GlobalHelper.nullIfBlank(CardBuilder.message);
     }
 
     public static int getDrawableBrand(String brand) {
@@ -276,7 +217,7 @@ public class CardModel extends JsonModel  {
         Integer expYear = optInteger(jsonObject, FIELD_EXP_YEAR);
         if (expYear != null && expYear < 0) expYear = null;
 
-        return new Builder(null, expMonth, expYear, null)
+        return new CardBuilder(null, expMonth, expYear, null)
                 .addressCity(optString(jsonObject, FIELD_ADDRESS_CITY))
                 .addressLine1(optString(jsonObject, FIELD_ADDRESS_LINE1))
                 .addressLine2(optString(jsonObject, FIELD_ADDRESS_LINE2))
