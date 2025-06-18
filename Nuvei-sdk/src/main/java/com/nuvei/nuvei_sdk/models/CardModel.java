@@ -198,11 +198,11 @@ public class CardModel extends JsonModel  {
         public Builder message(String message) { this.message = message; return this; }
 
         public CardModel build() {
-            return new Card(this);
+            return new CardModel(this);
         }
     }
 
-    private Card(Builder builder) {
+    private CardModel(Builder builder) {
         this.number = GlobalHelper.nullIfBlank(normalizeCardNumber(builder.number));
         this.expiryMonth = builder.expMonth;
         this.expiryYear = builder.expYear;
@@ -316,7 +316,7 @@ public class CardModel extends JsonModel  {
         boolean validLength = (cardType == null && cvcValue.length() >= 3 && cvcValue.length() <= 4)
                 || (AMERICAN_EXPRESS.equals(cardType) && cvcValue.length() == 4)
                 || cvcValue.length() == 3;
-        return ModelUtils.isWholePositiveNumber(cvcValue) && validLength;
+        return GlobalHelper.isWholePositiveNumber(cvcValue) && validLength;
     }
 
     public boolean validateExpiryDate() {
@@ -328,7 +328,7 @@ public class CardModel extends JsonModel  {
     }
 
     boolean validateExpYear(Calendar now) {
-        return expiryYear != null && !ModelUtils.hasYearPassed(expiryYear, now);
+        return expiryYear != null && !GlobalHelper.hasYearPassed(expiryYear, now);
     }
 
     boolean validateCard(Calendar now) {
@@ -336,7 +336,7 @@ public class CardModel extends JsonModel  {
     }
 
     boolean validateExpiryDate(Calendar now) {
-        return validateExpMonth() && validateExpYear(now) && !ModelUtils.hasMonthPassed(expiryYear, expiryMonth, now);
+        return validateExpMonth() && validateExpYear(now) && !GlobalHelper.hasMonthPassed(expiryYear, expiryMonth, now);
     }
 
     @Nullable
@@ -408,7 +408,7 @@ public class CardModel extends JsonModel  {
     @CardBrand
     public String getType() {
         if (GlobalHelper.isBlank(type) && !GlobalHelper.isBlank(number)) {
-            type = CardUtils.getPossibleCardType(number);
+            type = GlobalHelper.getPossibleCardType(number);
         }
         return type;
     }
@@ -420,9 +420,9 @@ public class CardModel extends JsonModel  {
     public String getFunding() { return funding; }
     @Nullable
     public String getCountry() { return country; }
-    @Nullable
-    @Override
-    public String getId() { return id; }
+//    @Nullable
+//    @Override
+//    public String getId() { return id; }
     @Nullable
     public String getAddressLine1Check() { return addressLine1Check; }
     @Nullable
@@ -463,7 +463,7 @@ public class CardModel extends JsonModel  {
     public List<String> getLoggingTokens() { return loggingTokens; }
 
     @NonNull
-    public Card addLoggingToken(@NonNull String loggingToken) {
+    public CardModel addLoggingToken(@NonNull String loggingToken) {
         loggingTokens.add(loggingToken);
         return this;
     }
