@@ -20,5 +20,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "NuveiSdk"
-include ':app'
+include ':example'
 include ':Nuvei-sdk'
