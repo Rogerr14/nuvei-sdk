@@ -6,5 +6,5 @@ import com.nuvei.nuvei_sdk.models.ErrorResponse;
 public interface IDeleteCardCallback {
     void onError(ErrorResponse error);
 
-    void onSuccess(DeleteCardResponseModel deleteCardResponseModel);
+    void onSuccess(String message);
 }

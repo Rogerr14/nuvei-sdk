@@ -3,6 +3,9 @@
     <style name="Base.Theme.NuveiSdk" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:colorPrimary" >
+            @color/black
+        </item>
     </style>
 
     <style name="Theme.NuveiSdk" parent="Base.Theme.NuveiSdk" />

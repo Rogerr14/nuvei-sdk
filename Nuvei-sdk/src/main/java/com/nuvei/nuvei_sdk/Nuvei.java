@@ -9,6 +9,9 @@ import com.google.gson.GsonBuilder;
 import com.nuvei.nuvei_sdk.add_card.model.CardRequestModel;
 import com.nuvei.nuvei_sdk.add_card.model.CardResponseModel;
 import com.nuvei.nuvei_sdk.add_card.services.IAddCardService;
+import com.nuvei.nuvei_sdk.delete_card.model.DeleteCardResponseModel;
+import com.nuvei.nuvei_sdk.delete_card.service.IDeleteCardCallback;
+import com.nuvei.nuvei_sdk.delete_card.service.IDeleteCardService;
 import com.nuvei.nuvei_sdk.helpers.GlobalHelper;
 import com.nuvei.nuvei_sdk.add_card.services.iAddCardCallback;
 import com.nuvei.nuvei_sdk.interceptorHttp.InterceptorHttp;
@@ -33,6 +36,7 @@ public class Nuvei {
 
     static IAddCardService iAddCardService;
     static IListCardsService iListCardsService;
+    static IDeleteCardService iDeleteCardService;
 
 
     public static boolean isTestMode() {
@@ -200,6 +204,44 @@ public class Nuvei {
         });
     }
 
+
+    public static void deleteCard(Context context, String userID, String tokenCard, IDeleteCardCallback iDeleteCardCallback){
+        iDeleteCardService = InterceptorHttp.getClient(context).create(IDeleteCardService.class);
+
+        iDeleteCardService.deleteCard(userID, tokenCard).enqueue(new Callback<DeleteCardResponseModel>() {
+            @Override
+            public void onResponse(Call<DeleteCardResponseModel> call, Response<DeleteCardResponseModel> response) {
+                DeleteCardResponseModel deleteCardResponseModel = response.body();
+                if(response.isSuccessful()){
+                    iDeleteCardCallback.onSuccess(deleteCardResponseModel.getMessage());
+                }else{
+                    ErrorResponse errorResponse = new ErrorResponse("Error", "", "General Error");
+                    Gson gson = new GsonBuilder().create();
+                    try {
+                        ErrorModel errorModel = gson.fromJson(response.errorBody().toString(), ErrorModel.class);
+                        iDeleteCardCallback.onError(errorModel.getError());
+                        return;
+                    }catch (Exception e){
+                        try{
+                            errorResponse =  new ErrorResponse("Exception", "Http Code" + response.code(), response.message());
+
+                        }catch (Exception ex){
+
+                        }
+                    }
+                    iDeleteCardCallback.onError(errorResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DeleteCardResponseModel> call, Throwable e) {
+                ErrorResponse error
+                        = new ErrorResponse("Network Exception",
+                        "Invoked when a network exception occurred communicating to the server.", e.getLocalizedMessage());
+                iDeleteCardCallback.onError(error);
+            }
+        });
+    }
 
 
 

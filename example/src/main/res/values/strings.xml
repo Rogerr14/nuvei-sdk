@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">NuveiSdk</string>
     <string name="try_library">Make a simulation</string>
+    <string name="description_logo">Nuvei logo</string>
+    <string name="sdk_label">SDK</string>
+    <string name="buy_button">Place Order</string>
+    <string name="quantity1">1</string>
+    <string name="quantity2">2</string>
+    <string name="quantity3">3</string>
+    <string name="product1">Milkshake</string>
+    <string name="product2">Bred and cheese</string>
+    <string name="product3">Piece of cake</string>
+    <string name="price1">$4.50</string>
+    <string name="price2">$6.50</string>
+    <string name="price3">$10.50</string>
+
 </resources>
