@@ -36,5 +36,5 @@ dependencies {
     implementation libs.retrofit2
     implementation libs.gson
     implementation libs.commons.codec
-    implementation(files("libs/kount-data-colllector-4.3.5.jar"))
+    implementation files('libs/kount-data-collector-4.3.5.jar')
 }

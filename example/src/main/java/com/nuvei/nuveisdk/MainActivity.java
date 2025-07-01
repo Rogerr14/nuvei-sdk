@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.OnBackPressedDispatcher;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -21,6 +23,13 @@ public class MainActivity extends AppCompatActivity {
     private Button simulationButton;
     private Context context;
 
+
+
+
+
+        public  boolean handleBackPress(){
+        return false;
+        }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
         context = this;
 
 
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+
+            }
+
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
 
         simulationButton.setOnClickListener(new View.OnClickListener() {
             @Override
