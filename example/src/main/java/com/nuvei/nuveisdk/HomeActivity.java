@@ -1,6 +1,7 @@
 package com.nuvei.nuveisdk;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -45,7 +46,19 @@ public class HomeActivity extends AppCompatActivity {
             imageCard.setImageResource(com.nuvei.nuvei_sdk.R.drawable.ic_unknown);
             titleCard.setText("Agregar Tarjeta");
             descriptionCard.setText("Debe agregar una tarjeta para continuar");
+
         }
+
+
+
+
+        cardDebitView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, CardActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }

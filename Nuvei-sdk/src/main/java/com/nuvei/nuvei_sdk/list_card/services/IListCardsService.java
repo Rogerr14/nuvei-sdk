@@ -7,7 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface IListCardsService {
-    @GET("/card/list")
+    @GET("card/list")
     Call<CardListResponseModel> getAllCards(@Query("uid") String uid);
 
 }

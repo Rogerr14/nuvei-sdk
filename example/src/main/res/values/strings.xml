@@ -13,5 +13,7 @@
     <string name="price1">$4.50</string>
     <string name="price2">$6.50</string>
     <string name="price3">$10.50</string>
+    <string name="logo_image">logo_image</string>
+    <string name="add_card_description">Añadir tarjeta</string>
 
 </resources>

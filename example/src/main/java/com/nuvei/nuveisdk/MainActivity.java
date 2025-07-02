@@ -1,5 +1,8 @@
 package com.nuvei.nuveisdk;
 
+import static com.nuvei.nuveisdk.constants.Constants.SERVER_APP_CODE;
+import static com.nuvei.nuveisdk.constants.Constants.SERVER_APP_KEY;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +19,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.nuveisdk.R;
+import com.nuvei.nuvei_sdk.Nuvei;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -37,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         simulationButton = (Button)findViewById(R.id.simulationButton);
         context = this;
 
-
+        Nuvei.configEnvironment(true, SERVER_APP_CODE,SERVER_APP_KEY);
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
