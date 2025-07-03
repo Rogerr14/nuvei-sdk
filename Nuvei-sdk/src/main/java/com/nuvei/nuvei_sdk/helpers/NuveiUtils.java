@@ -3,6 +3,7 @@ package com.nuvei.nuvei_sdk.helpers;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Base64;
+import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -21,8 +22,9 @@ public class NuveiUtils {
 
     public static  String getAuthToken(String client_key, String client_code ){
         long time_stamp_time = System.currentTimeMillis()/1000;
-        String time_stamp_string = Long.toString(time_stamp_time);
+        String time_stamp_string = String.valueOf(time_stamp_time);
         String auth_token = client_code + ";" + time_stamp_string + ";" + getUniqueToken(time_stamp_string, client_key);
+        Log.v("token", Base64.encodeToString(auth_token.getBytes(), Base64.NO_WRAP));
         return Base64.encodeToString(auth_token.getBytes(), Base64.NO_WRAP);
     }
 

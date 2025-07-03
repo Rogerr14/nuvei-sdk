@@ -2,12 +2,16 @@ package com.nuvei.nuveisdk;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -20,6 +24,7 @@ public class HomeActivity extends AppCompatActivity {
     private CardView cardDebitView;
     private ImageView imageCard;
     private TextView titleCard;
+    private Button buttonOrder;
     private TextView descriptionCard;
     private Context context;
     @Override
@@ -30,8 +35,12 @@ public class HomeActivity extends AppCompatActivity {
         imageCard = (ImageView) findViewById(R.id.imageView);
         titleCard = (TextView) findViewById(R.id.tittle_card);
         descriptionCard = (TextView) findViewById(R.id.description_card);
+        buttonOrder = (Button) findViewById(R.id.button_order);
         context = this;
 
+
+
+        Log.v("create", "entra en el create");
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -42,12 +51,6 @@ public class HomeActivity extends AppCompatActivity {
         getOnBackPressedDispatcher().addCallback(this, callback);
 
 
-        if(cardModel == null){
-            imageCard.setImageResource(com.nuvei.nuvei_sdk.R.drawable.ic_unknown);
-            titleCard.setText("Agregar Tarjeta");
-            descriptionCard.setText("Debe agregar una tarjeta para continuar");
-
-        }
 
 
 
@@ -60,5 +63,19 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.v("Resume", "entra en el resume");
+
+        if(cardModel == null){
+            imageCard.setImageResource(com.nuvei.nuvei_sdk.R.drawable.ic_unknown);
+            titleCard.setText("Agregar Tarjeta");
+            descriptionCard.setText("Debe agregar una tarjeta para continuar");
+            buttonOrder.setBackgroundColor(getResources().getColor(R.color.gray, getTheme()));
+            buttonOrder.setClickable(false);
+        }
     }
 }

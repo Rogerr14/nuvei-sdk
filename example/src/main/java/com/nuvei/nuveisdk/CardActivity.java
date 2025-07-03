@@ -14,6 +14,7 @@ import com.nuvei.nuvei_sdk.helpers.NuveiUtils;
 import com.nuvei.nuvei_sdk.list_card.services.IListCardCallback;
 import com.nuvei.nuvei_sdk.models.CardModel;
 import com.nuvei.nuvei_sdk.models.ErrorResponse;
+import com.nuvei.nuveisdk.fragments.AlertDialogFragment;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -40,11 +41,11 @@ public class CardActivity extends AppCompatActivity {
 
         try {
             Log.v("Request", "entra aqui");
-        Nuvei.getAllCards(context, "sda", new IListCardCallback(){
+        Nuvei.getAllCards(context, "4", new IListCardCallback(){
             @Override
             public void onError(ErrorResponse errorResponse) {
                 Log.v("Error peticicon", errorResponse.getDescription());
-                NuveiUtils.show(context, "Error", errorResponse.getDescription());
+                AlertDialogFragment.ShowErrorDialog(context, "Atención", "Ocurrio un error al realizar esta petición", null);
             }
 
             @Override

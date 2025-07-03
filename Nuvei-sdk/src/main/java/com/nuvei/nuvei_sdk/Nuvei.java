@@ -1,6 +1,7 @@
 package com.nuvei.nuvei_sdk;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -88,7 +89,6 @@ public class Nuvei {
         cardRequestModel.setSessionId(GlobalHelper.getSessionId(mContext));
         cardRequestModel.setCard(cardModel);
         cardRequestModel.setUser(userModel);
-
         iAddCardService.addCard(cardRequestModel).enqueue(new Callback<CardResponseModel>() {
             @Override
             public void onResponse(Call<CardResponseModel> call, Response<CardResponseModel> response) {
