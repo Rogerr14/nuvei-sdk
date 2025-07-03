@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="acc_label_add_card">Adicionar cartão</string>
     <string name="acc_label_card_number">Número do cartão</string>
     <string name="acc_label_expiry_date">Data de validade</string>
     <string name="acc_label_zip">Código postal</string>

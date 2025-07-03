@@ -20,7 +20,7 @@ public class InterceptorHttp {
 
     static OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
-    public static  Retrofit getClient(Context mContext){
+    public static  Retrofit getClient(Context mContext, String code, String key){
         if(retrofit == null){
             String URL_BASE;
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
@@ -35,7 +35,7 @@ public class InterceptorHttp {
 
             builder.addInterceptor(chain -> {
                 Request request = chain.request().newBuilder().addHeader("Content-Type", "application/json")
-                        .addHeader("Auth-Token", NuveiUtils.getAuthToken(Nuvei.getClientKey(), Nuvei.getClientCode()))
+                        .addHeader("Auth-Token", NuveiUtils.getAuthToken(key, code))
                         .build();
 
                 return chain.proceed(request);

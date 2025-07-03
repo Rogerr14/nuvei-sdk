@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="acc_label_add_card">Agregar Tarjeta</string>
     <string name="acc_label_card_number">Número de tarjeta</string>
     <string name="acc_label_expiry_date">Fecha de vencimiento</string>
     <string name="acc_label_zip">Código postal</string>

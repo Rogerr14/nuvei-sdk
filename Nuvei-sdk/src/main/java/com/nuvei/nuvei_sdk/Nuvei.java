@@ -35,6 +35,9 @@ public class Nuvei {
     private static String CLIENT_CODE;
     private static String CLIENT_KEY;
 
+    private static String SERVER_CODE;
+    private static String SERVER_KEY;
+
     static IAddCardService iAddCardService;
     static IListCardsService iListCardsService;
     static IDeleteCardService iDeleteCardService;
@@ -64,10 +67,12 @@ public class Nuvei {
      */
 
 
-    public static void configEnvironment(boolean isDev, String CLIENT_CODE_APP, String CLIENT_KEY_APP){
+    public static void configEnvironment(boolean isDev, String CLIENT_CODE_APP, String CLIENT_KEY_APP, String SERVER_CODE_APP, String SERVER_KEY_APP){
         TEST_MODE =  isDev;
         CLIENT_CODE = CLIENT_CODE_APP;
         CLIENT_KEY = CLIENT_KEY_APP;
+        SERVER_CODE = SERVER_CODE_APP;
+        SERVER_KEY = SERVER_KEY_APP;
     }
 
     /**
@@ -79,7 +84,7 @@ public class Nuvei {
      * @param iAddCardCallback
      */
     public static  void addCard(Context mContext, @NonNull final String uid, @NonNull final String email, @NonNull final CardModel cardModel, @NonNull iAddCardCallback iAddCardCallback){
-            iAddCardService = InterceptorHttp.getClient(mContext).create(IAddCardService.class);
+            iAddCardService = InterceptorHttp.getClient(mContext, CLIENT_CODE, CLIENT_KEY).create(IAddCardService.class);
             UserModel userModel = new UserModel();
             userModel.setId(uid);
             userModel.setEmail(email);
@@ -146,7 +151,7 @@ public class Nuvei {
 
 
     public  static void getAllCards(Context context, String userID, IListCardCallback iListCardCallback){
-        iListCardsService = InterceptorHttp.getClient(context).create(IListCardsService.class);
+        iListCardsService = InterceptorHttp.getClient(context, SERVER_CODE, SERVER_KEY).create(IListCardsService.class);
 
         iListCardsService.getAllCards(userID).enqueue(new Callback<CardListResponseModel>() {
             @Override
@@ -206,7 +211,7 @@ public class Nuvei {
 
 
     public static void deleteCard(Context context, String userID, String tokenCard, IDeleteCardCallback iDeleteCardCallback){
-        iDeleteCardService = InterceptorHttp.getClient(context).create(IDeleteCardService.class);
+        iDeleteCardService = InterceptorHttp.getClient(context, SERVER_CODE, SERVER_KEY).create(IDeleteCardService.class);
 
         iDeleteCardService.deleteCard(userID, tokenCard).enqueue(new Callback<DeleteCardResponseModel>() {
             @Override

@@ -20,10 +20,10 @@ public class NuveiUtils {
         return new String(Hex.encodeHex(DigestUtils.sha256(unique_token)));
     }
 
-    public static  String getAuthToken(String client_key, String client_code ){
+    public static  String getAuthToken(String key, String code ){
         long time_stamp_time = System.currentTimeMillis()/1000;
         String time_stamp_string = String.valueOf(time_stamp_time);
-        String auth_token = client_code + ";" + time_stamp_string + ";" + getUniqueToken(time_stamp_string, client_key);
+        String auth_token = code + ";" + time_stamp_string + ";" + getUniqueToken(time_stamp_string, key);
         Log.v("token", Base64.encodeToString(auth_token.getBytes(), Base64.NO_WRAP));
         return Base64.encodeToString(auth_token.getBytes(), Base64.NO_WRAP);
     }

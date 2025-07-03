@@ -14,6 +14,7 @@
     <string name="name_helper" translatable="false">Jhon Doe</string>
 
 
+    <string name="acc_label_add_card">Add card</string>
     <string name="acc_label_card_number">Card number</string>
     <string name="acc_label_expiry_date">Expiration date</string>
     <string name="acc_label_cardholdername">Card Holder\'s Name</string>
