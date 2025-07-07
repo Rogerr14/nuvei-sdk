@@ -1,6 +1,6 @@
-package com.nuvei.nuvei_sdk.delete_card.service;
+package com.nuvei.nuveisdk.delete_card.service;
 
-import com.nuvei.nuvei_sdk.delete_card.model.DeleteCardResponseModel;
+import com.nuvei.nuveisdk.delete_card.model.DeleteCardResponseModel;
 
 import retrofit2.Call;
 import retrofit2.http.FormUrlEncoded;

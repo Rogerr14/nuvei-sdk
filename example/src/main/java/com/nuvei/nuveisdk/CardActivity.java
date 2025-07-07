@@ -5,13 +5,11 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nuveisdk.R;
 import com.nuvei.nuvei_sdk.Nuvei;
-import com.nuvei.nuvei_sdk.helpers.NuveiUtils;
-import com.nuvei.nuvei_sdk.list_card.services.IListCardCallback;
+import com.nuvei.nuveisdk.list_card.services.IListCardCallback;
 import com.nuvei.nuvei_sdk.models.CardModel;
 import com.nuvei.nuvei_sdk.models.ErrorResponse;
 import com.nuvei.nuveisdk.fragments.AlertDialogFragment;
