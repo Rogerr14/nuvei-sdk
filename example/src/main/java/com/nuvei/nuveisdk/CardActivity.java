@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nuveisdk.R;
 import com.nuvei.nuvei_sdk.Nuvei;
-import com.nuvei.nuveisdk.list_card.services.IListCardCallback;
+import com.nuvei.nuvei_sdk.list_card.services.IListCardCallback;
 import com.nuvei.nuvei_sdk.models.CardModel;
 import com.nuvei.nuvei_sdk.models.ErrorResponse;
 import com.nuvei.nuveisdk.fragments.AlertDialogFragment;

@@ -1,4 +1,4 @@
-package com.nuvei.nuveisdk.list_card.services;
+package com.nuvei.nuvei_sdk.list_card.services;
 
 import com.nuvei.nuvei_sdk.models.CardModel;
 import com.nuvei.nuvei_sdk.models.ErrorResponse;

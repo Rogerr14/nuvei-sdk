@@ -1,6 +1,6 @@
-package com.nuvei.nuveisdk.list_card.services;
+package com.nuvei.nuvei_sdk.list_card.services;
 
-import com.nuvei.nuveisdk.list_card.model.CardListResponseModel;
+import com.nuvei.nuvei_sdk.list_card.model.CardListResponseModel;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

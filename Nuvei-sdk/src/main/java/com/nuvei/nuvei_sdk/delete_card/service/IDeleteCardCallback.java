@@ -1,4 +1,4 @@
-package com.nuvei.nuveisdk.delete_card.service;
+package com.nuvei.nuvei_sdk.delete_card.service;
 
 import com.nuvei.nuvei_sdk.models.ErrorResponse;
 

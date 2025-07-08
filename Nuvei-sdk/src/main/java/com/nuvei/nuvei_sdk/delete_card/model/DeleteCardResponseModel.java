@@ -1,4 +1,4 @@
-package com.nuvei.nuveisdk.delete_card.model;
+package com.nuvei.nuvei_sdk.delete_card.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

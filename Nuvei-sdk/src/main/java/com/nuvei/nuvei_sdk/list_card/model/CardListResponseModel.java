@@ -1,4 +1,4 @@
-package com.nuvei.nuveisdk.list_card.model;
+package com.nuvei.nuvei_sdk.list_card.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
