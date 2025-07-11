@@ -19,6 +19,7 @@
     <string name="acc_label_expiry_date">Expiration date</string>
     <string name="acc_label_cardholdername">Card Holder\'s Name</string>
     <string name="acc_label_zip">ZIP Code</string>
+    <string name="acc_label_cvc">CVC</string>
     <string name="expiry_date_hint">MM/YY</string>
     <string name="expiry_label_short">Expiry</string>
     <string name="invalid_card_number">Your card\'s number is invalid.</string>
@@ -30,5 +31,8 @@
     <string name="clave_tuya">Tuya Password</string>
     <string name="error_fiscal_number">Invalid Identification document</string>
     <string name="error_nip">Invalid Password</string>
+    <string name="acc_label_accept">Ok</string>
+    <string name="acc_label_cancel">Cancel</string>
 
+    <string name="acc_description_label_card_number">Card\'s numbers</string>
 </resources>

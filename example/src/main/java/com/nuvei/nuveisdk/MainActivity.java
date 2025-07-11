@@ -7,9 +7,11 @@ import static com.nuvei.nuveisdk.constants.Constants.SERVER_APP_KEY;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.metrics.BundleSession;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, HomeActivity.class);
+
                 startActivity(intent);
             }
         });

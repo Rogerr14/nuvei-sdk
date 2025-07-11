@@ -9,6 +9,7 @@ import com.google.gson.GsonBuilder;
 import com.nuvei.nuvei_sdk.add_card.model.CardRequestModel;
 import com.nuvei.nuvei_sdk.add_card.model.CardResponseModel;
 import com.nuvei.nuvei_sdk.add_card.services.IAddCardService;
+import com.nuvei.nuvei_sdk.delete_card.model.DeleteCardRequestModel;
 import com.nuvei.nuvei_sdk.delete_card.model.DeleteCardResponseModel;
 import com.nuvei.nuvei_sdk.delete_card.service.IDeleteCardCallback;
 import com.nuvei.nuvei_sdk.delete_card.service.IDeleteCardService;
@@ -23,7 +24,9 @@ import com.nuvei.nuvei_sdk.models.ErrorResponse;
 import com.nuvei.nuvei_sdk.models.ErrorModel;
 import com.nuvei.nuvei_sdk.models.UserModel;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -158,8 +161,10 @@ public class Nuvei {
                 CardListResponseModel cardListResponseModel = response.body();
                 if(response.isSuccessful()){
                     if(cardListResponseModel != null){
-
-                    iListCardCallback.onSuccess(cardListResponseModel.getCards());
+                        List<CardModel> cardAvailable = cardListResponseModel.getCards().stream()
+                                .filter(cardModel -> cardModel.getStatus() != null && cardModel.getStatus().equals("valid"))
+                                .collect(Collectors.toList());
+                    iListCardCallback.onSuccess(cardAvailable);
                     }else{
                         ErrorResponse errorResponse = new ErrorResponse("Error", "", "No information");
                         Gson gson = new GsonBuilder().create();
@@ -211,8 +216,8 @@ public class Nuvei {
 
     public static void deleteCard(Context context, String userID, String tokenCard, IDeleteCardCallback iDeleteCardCallback){
         iDeleteCardService = InterceptorHttp.getClient(context, SERVER_CODE, SERVER_KEY).create(IDeleteCardService.class);
-
-        iDeleteCardService.deleteCard(userID, tokenCard).enqueue(new Callback<DeleteCardResponseModel>() {
+        DeleteCardRequestModel deleteCardRequestModel = new DeleteCardRequestModel(tokenCard, userID);
+        iDeleteCardService.deleteCard(deleteCardRequestModel).enqueue(new Callback<DeleteCardResponseModel>() {
             @Override
             public void onResponse(Call<DeleteCardResponseModel> call, Response<DeleteCardResponseModel> response) {
                 DeleteCardResponseModel deleteCardResponseModel = response.body();

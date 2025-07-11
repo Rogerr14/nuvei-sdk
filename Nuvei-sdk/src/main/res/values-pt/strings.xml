@@ -5,6 +5,7 @@
     <string name="acc_label_expiry_date">Data de validade</string>
     <string name="acc_label_zip">Código postal</string>
     <string name="expiry_date_hint">MM/AA</string>
+    <string name="acc_label_cvc">CVC</string>
     <string name="expiry_label_short">Valid.</string>
     <string name="invalid_card_number">Número do cartão Inválido.</string>
     <string name="invalid_expiry_year">O ano de validade do cartão é inválido.</string>
@@ -16,4 +17,10 @@
     <string name="error_fiscal_number">Documento de identificação inválido</string>
     <string name="clave_tuya">Senha Tuya</string>
     <string name="documento_de_identificacion">Documento de identificação</string>
+    <string name="acc_label_accept">Aceitar</string>
+    <string name="acc_label_cancel">Cancelar</string>
+
+
+
+    <string name="acc_description_label_card_number">número do cartão</string>
 </resources>
