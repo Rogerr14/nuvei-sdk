@@ -119,7 +119,7 @@ public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         // Set card details
-        holder.textViewCardNumber.setText(String.format("XXXX.%s - status: %s",
+        holder.textViewCardNumber.setText(String.format("····%s - status: %s",
                 safeGet(card.getLast4(), "****"),
                 safeGet(card.getStatus(), "Unknown")));
         holder.textViewCardHoldersName.setText(safeGet(card.getHolderName(), "Unknown"));

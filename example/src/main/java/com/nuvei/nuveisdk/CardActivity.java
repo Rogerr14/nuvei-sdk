@@ -78,7 +78,8 @@ public class CardActivity extends AppCompatActivity {
 
         addCardButton = (FloatingActionButton) findViewById(R.id.button_add_card);
         addCardButton.setOnClickListener((view -> {
-           // Intent intent = new Intent(context, AD)
+            Intent intent = new Intent(context, AddCardActivity.class);
+            startActivity(intent);
         }));
         recyclerView = (RecyclerView) findViewById(R.id.list_cards);
         recyclerView.setHasFixedSize(true);

@@ -25,6 +25,7 @@
         <activity android:name="com.nuvei.nuveisdk.HomeActivity">
         </activity>
         <activity android:name="com.nuvei.nuveisdk.CardActivity" />
+        <activity android:name="com.nuvei.nuveisdk.AddCardActivity"/>
     </application>
 
 </manifest>

@@ -472,6 +472,42 @@ public class CardModel extends JsonModel {
         return map;
     }
 
+
+    @NonNull
+    public static String getCardBrandPosible(@Nullable String cardNumber) {
+        if (cardNumber == null || cardNumber.trim().isEmpty()) {
+            return UNKNOWN;
+        }
+
+        // Limpiar el número de tarjeta (eliminar espacios y guiones)
+        String cleanCardNumber = cardNumber.replaceAll("[\\s-]", "");
+
+        // Verificar prefijos para cada marca
+        if (startsWithAny(cleanCardNumber, PREFIXES_VISA)) {
+            return VISA;
+        } else if (startsWithAny(cleanCardNumber, PREFIXES_MASTERCARD)) {
+            return MASTERCARD;
+        } else if (startsWithAny(cleanCardNumber, PREFIXES_AMERICAN_EXPRESS)) {
+            return AMERICAN_EXPRESS;
+        } else if (startsWithAny(cleanCardNumber, PREFIXES_DISCOVER)) {
+            return DISCOVER;
+        } else if (startsWithAny(cleanCardNumber, PREFIXES_JCB)) {
+            return JCB;
+        } else if (startsWithAny(cleanCardNumber, PREFIXES_DINERS_CLUB)) {
+            return DINERS_CLUB;
+        }
+
+        return UNKNOWN;
+    }
+
+    private static boolean startsWithAny(@NonNull String cardNumber, @NonNull String[] prefixes) {
+        for (String prefix : prefixes) {
+            if (cardNumber.startsWith(prefix)) {
+                return true;
+            }
+        }
+        return false;
+    }
     public static void removeNullAndEmptyParams(@NonNull Map<String, Object> map) {
         for (String key : new HashSet<>(map.keySet())) {
             Object value = map.get(key);

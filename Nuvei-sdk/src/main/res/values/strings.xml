@@ -16,7 +16,7 @@
 
     <string name="acc_label_add_card">Add card</string>
     <string name="acc_label_card_number">Card number</string>
-    <string name="acc_label_expiry_date">Expiration date</string>
+    <string name="acc_label_expiry_date">MM/YY</string>
     <string name="acc_label_cardholdername">Card Holder\'s Name</string>
     <string name="acc_label_zip">ZIP Code</string>
     <string name="acc_label_cvc">CVC</string>

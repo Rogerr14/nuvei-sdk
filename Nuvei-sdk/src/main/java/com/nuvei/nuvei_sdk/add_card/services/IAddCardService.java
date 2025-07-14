@@ -9,7 +9,7 @@ import retrofit2.http.POST;
 
 public interface IAddCardService {
 
-    @POST("/card/add")
+    @POST("card/add")
     Call<CardResponseModel> addCard(@Body CardRequestModel cardRequestModel);
 
 

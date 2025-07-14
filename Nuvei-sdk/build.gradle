@@ -33,7 +33,8 @@ dependencies {
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
     implementation libs.logging.interceptor
-
+    implementation libs.picasso
+    implementation libs.iocard
 
     implementation libs.retrofit2
     implementation libs.gson

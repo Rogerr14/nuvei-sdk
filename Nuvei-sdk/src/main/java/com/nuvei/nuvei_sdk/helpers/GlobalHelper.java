@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -168,7 +169,7 @@ public  class GlobalHelper {
 
             sum += digitInteger;
         }
-
+        Log.v("validacion", String.valueOf(sum%10 == 0));
         return sum % 10 == 0;
     }
 

@@ -105,8 +105,8 @@ public class HomeActivity extends AppCompatActivity {
                 String CARD_HOLDER = data.getStringExtra("CARD_HOLDER");
                 if (CARD_LAST4 != null  && !CARD_LAST4.equals("")){
                     imageCard.setImageResource(CardModel.getDrawableBrand(CARD_TYPE));
-                    titleCard.setText("XXXX"+CARD_LAST4);
-                    descriptionCard.setText(CARD_HOLDER);
+                    titleCard.setText("····"+CARD_LAST4);
+                    descriptionCard.setText(CARD_HOLDER.toUpperCase());
                     buttonOrder.setBackgroundColor(getResources().getColor(R.color.black, getTheme()));
                     buttonOrder.setClickable(true);
 

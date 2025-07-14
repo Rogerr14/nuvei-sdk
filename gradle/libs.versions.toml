@@ -11,7 +11,9 @@ retrofit2 = "3.0.0"
 gson = "3.0.0"
 commons-codec = "1.18.0"
 logging-interceptor = "5.0.0-alpha.16"
-
+picasso ="2.8"
+iocard = "5.5.1"
+gms ="18.0.1"
 
 
 [libraries]
@@ -26,7 +28,9 @@ retrofit2 = {module =  "com.squareup.retrofit2:retrofit", version.ref= "retrofit
 gson = {module= "com.squareup.retrofit2:converter-gson", version.ref= "gson" }
 commons-codec = {module = "commons-codec:commons-codec", version.ref="commons-codec"}
 logging-interceptor = {module="com.squareup.okhttp3:logging-interceptor", version.ref = "logging-interceptor"}
-
+picasso = {module="com.squareup.picasso:picasso", version.ref="picasso"}
+iocard = {module="io.card:android-sdk", version.ref="iocard"}
+gms ={module="com.google.android.gms:play-services-instantapps", version.ref="gms"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

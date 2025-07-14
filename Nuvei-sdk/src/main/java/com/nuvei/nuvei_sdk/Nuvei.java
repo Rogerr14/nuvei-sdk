@@ -1,11 +1,14 @@
 package com.nuvei.nuvei_sdk;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 
 import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kount.api.DataCollector;
 import com.nuvei.nuvei_sdk.add_card.model.CardRequestModel;
 import com.nuvei.nuvei_sdk.add_card.model.CardResponseModel;
 import com.nuvei.nuvei_sdk.add_card.services.IAddCardService;
@@ -43,6 +46,8 @@ public class Nuvei {
     static IAddCardService iAddCardService;
     static IListCardsService iListCardsService;
     static IDeleteCardService iDeleteCardService;
+    static String MERCHANT_ID = "500005";
+    static  int KOUNT_ENVIRONMENT = DataCollector.ENVIRONMENT_TEST;
 
 
     public static boolean isTestMode() {
@@ -75,6 +80,9 @@ public class Nuvei {
         CLIENT_KEY = CLIENT_KEY_APP;
         SERVER_CODE = SERVER_CODE_APP;
         SERVER_KEY = SERVER_KEY_APP;
+        if(!TEST_MODE){
+            KOUNT_ENVIRONMENT = DataCollector.ENVIRONMENT_PRODUCTION;
+        }
     }
 
     /**
@@ -93,7 +101,7 @@ public class Nuvei {
             userModel.setFiscal_number(cardModel.getFiscal_number());
         CardRequestModel cardRequestModel = new CardRequestModel();
 
-        cardRequestModel.setSessionId(GlobalHelper.getSessionId(mContext));
+        cardRequestModel.setSessionId(getSessionId(mContext));
         cardRequestModel.setCard(cardModel);
         cardRequestModel.setUser(userModel);
         iAddCardService.addCard(cardRequestModel).enqueue(new Callback<CardResponseModel>() {
@@ -264,9 +272,30 @@ public class Nuvei {
     * */
 
 
-    public static String getSessionId(){
+    public static String getSessionId(Context context){
         String sessionID = UUID.randomUUID().toString();
-        return  sessionID.replace("-", "");
+        final String deviceSessionID =sessionID.replace("-", "");
+        final DataCollector dataCollector = com.kount.api.DataCollector.getInstance();
+       dataCollector.setDebug(TEST_MODE);
+       dataCollector.setContext(context);
+       dataCollector.setMerchantID(MERCHANT_ID);
+       dataCollector.setEnvironment(KOUNT_ENVIRONMENT);
+       dataCollector.setLocationCollectorConfig(DataCollector.LocationConfig.COLLECT);
+       new Handler(Looper.getMainLooper()).post(() -> {
+          dataCollector.collectForSession(deviceSessionID, new DataCollector.CompletionHandler(){
+
+              @Override
+              public void completed(String s) {
+
+              }
+
+              @Override
+              public void failed(String s, DataCollector.Error error) {
+
+              }
+          });
+       });
+        return   deviceSessionID;
     }
 
 }
