@@ -33,7 +33,6 @@
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/acc_label_cardholdername"
             android:layout_marginTop="8dp"
             android:paddingBottom="8dp"
 
@@ -70,8 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:startIconDrawable="@drawable/ic_unknown"
-                app:hintEnabled="true"
-                android:hint="@string/acc_label_card_number">
+                app:hintEnabled="true">
 
                 <com.nuvei.nuvei_sdk.add_card.view.CardNumberEditText
                     android:id="@+id/et_add_source_card_number"
@@ -121,7 +119,7 @@
                     android:id="@+id/et_add_source_expiry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/acc_label_expiry_date"
+                    android:hint="@string/expiry_date_hint"
                     android:inputType="date"
                     android:maxLength="5"
                     android:nextFocusDown="@+id/et_add_source_cvc"
@@ -181,6 +179,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
+                android:hint=""
                 android:digits="@string/valid_digits"
                 android:id="@+id/et_add_fiscal_number"
                 />

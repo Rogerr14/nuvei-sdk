@@ -3,6 +3,7 @@ package com.nuvei.nuvei_sdk;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -75,6 +76,8 @@ public class Nuvei {
 
 
     public static void configEnvironment(boolean isDev, String CLIENT_CODE_APP, String CLIENT_KEY_APP, String SERVER_CODE_APP, String SERVER_KEY_APP){
+
+       Log.v("asignacion", CLIENT_CODE_APP);
         TEST_MODE =  isDev;
         CLIENT_CODE = CLIENT_CODE_APP;
         CLIENT_KEY = CLIENT_KEY_APP;
@@ -94,14 +97,21 @@ public class Nuvei {
      * @param iAddCardCallback
      */
     public static  void addCard(Context mContext, @NonNull final String uid, @NonNull final String email, @NonNull final CardModel cardModel, @NonNull iAddCardCallback iAddCardCallback){
-            iAddCardService = InterceptorHttp.getClient(mContext, CLIENT_CODE, CLIENT_KEY).create(IAddCardService.class);
+        Log.v("METODO", CLIENT_CODE);
+        InterceptorHttp client = new InterceptorHttp();
+            iAddCardService = client.getClient(mContext, CLIENT_CODE, CLIENT_KEY).create(IAddCardService.class);
             UserModel userModel = new UserModel();
             userModel.setId(uid);
             userModel.setEmail(email);
             userModel.setFiscal_number(cardModel.getFiscal_number());
         CardRequestModel cardRequestModel = new CardRequestModel();
 
-        cardRequestModel.setSessionId(getSessionId(mContext));
+//        try{
+//
+//        //cardRequestModel.setSessionId(getSessionId(mContext));
+//        }catch (Exception e){
+//            Log.v("ocurrio un error", e.toString());
+//        }
         cardRequestModel.setCard(cardModel);
         cardRequestModel.setUser(userModel);
         iAddCardService.addCard(cardRequestModel).enqueue(new Callback<CardResponseModel>() {
@@ -161,7 +171,8 @@ public class Nuvei {
 
 
     public  static void getAllCards(Context context, String userID, IListCardCallback iListCardCallback){
-        iListCardsService = InterceptorHttp.getClient(context, SERVER_CODE, SERVER_KEY).create(IListCardsService.class);
+        InterceptorHttp client = new InterceptorHttp();
+        iListCardsService = client.getClient(context, SERVER_CODE, SERVER_KEY).create(IListCardsService.class);
 
         iListCardsService.getAllCards(userID).enqueue(new Callback<CardListResponseModel>() {
             @Override
@@ -223,7 +234,8 @@ public class Nuvei {
 
 
     public static void deleteCard(Context context, String userID, String tokenCard, IDeleteCardCallback iDeleteCardCallback){
-        iDeleteCardService = InterceptorHttp.getClient(context, SERVER_CODE, SERVER_KEY).create(IDeleteCardService.class);
+        InterceptorHttp client = new InterceptorHttp();
+        iDeleteCardService = client.getClient(context, SERVER_CODE, SERVER_KEY).create(IDeleteCardService.class);
         DeleteCardRequestModel deleteCardRequestModel = new DeleteCardRequestModel(tokenCard, userID);
         iDeleteCardService.deleteCard(deleteCardRequestModel).enqueue(new Callback<DeleteCardResponseModel>() {
             @Override
@@ -275,25 +287,30 @@ public class Nuvei {
     public static String getSessionId(Context context){
         String sessionID = UUID.randomUUID().toString();
         final String deviceSessionID =sessionID.replace("-", "");
-        final DataCollector dataCollector = com.kount.api.DataCollector.getInstance();
+        final DataCollector dataCollector = DataCollector.getInstance();
        dataCollector.setDebug(TEST_MODE);
        dataCollector.setContext(context);
        dataCollector.setMerchantID(MERCHANT_ID);
        dataCollector.setEnvironment(KOUNT_ENVIRONMENT);
        dataCollector.setLocationCollectorConfig(DataCollector.LocationConfig.COLLECT);
-       new Handler(Looper.getMainLooper()).post(() -> {
-          dataCollector.collectForSession(deviceSessionID, new DataCollector.CompletionHandler(){
+       new Handler(Looper.getMainLooper()).post(new Runnable() {
+           @Override
+           public void run() {
+               dataCollector.collectForSession(deviceSessionID, new DataCollector.CompletionHandler(){
 
-              @Override
-              public void completed(String s) {
+                   @Override
+                   public void completed(String s) {
 
-              }
+                   }
 
-              @Override
-              public void failed(String s, DataCollector.Error error) {
+                   @Override
+                   public void failed(String s, DataCollector.Error error) {
 
-              }
-          });
+                   }
+               });
+           }
+
+
        });
         return   deviceSessionID;
     }

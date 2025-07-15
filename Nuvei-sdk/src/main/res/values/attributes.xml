@@ -11,5 +11,6 @@
         <attr name="shouldShowCardHolderName" format="boolean" />
         <attr name="shouldShowScanCard" format="boolean" />
         <attr name="shouldShowPaymentezLogo" format="boolean" />
+        <attr name="shouldFiscalNumber" format="boolean"/>
     </declare-styleable>
 </resources>

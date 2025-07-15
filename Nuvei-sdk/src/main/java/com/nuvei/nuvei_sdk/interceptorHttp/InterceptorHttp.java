@@ -16,40 +16,34 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class InterceptorHttp {
-    private static Retrofit retrofit = null;
-
-    static OkHttpClient.Builder builder = new OkHttpClient.Builder();
-
-    public static  Retrofit getClient(Context mContext, String code, String key){
-        if(retrofit == null){
-            String URL_BASE;
-            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-            if(Nuvei.isTestMode()){
-                URL_BASE = SERVER_DEV_URL;
-                builder.addInterceptor(logging);
-            }else{
-                URL_BASE = SERVER_PROD_URL;
-            }
 
 
-            builder.addInterceptor(chain -> {
-                Request request = chain.request().newBuilder().addHeader("Content-Type", "application/json")
-                        .addHeader("Auth-Token", NuveiUtils.getAuthToken(key, code))
-                        .build();
+      public Retrofit getClient(Context mContext, String code, String key){
+          String URL_BASE = Nuvei.isTestMode() ? SERVER_DEV_URL : SERVER_PROD_URL;
 
-                return chain.proceed(request);
-            });
+          OkHttpClient.Builder builder = new OkHttpClient.Builder();
+          HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+          logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+          if (Nuvei.isTestMode()) {
+              builder.addInterceptor(logging);
+          }
 
-            OkHttpClient client = builder.build();
+          builder.addInterceptor(chain -> {
+              String authToken = NuveiUtils.getAuthToken(key, code);
+              Log.d("InterceptorHttp", "Generated Auth-Token for " + code + ": " + authToken);
+              Request request = chain.request().newBuilder()
+                      .addHeader("Content-Type", "application/json")
+                      .addHeader("Auth-Token", authToken)
+                      .build();
+              return chain.proceed(request);
+          });
 
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(URL_BASE)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .client(client)
-                    .build();
+          OkHttpClient client = builder.build();
 
-        }
-        return  retrofit;
+          return new Retrofit.Builder()
+                  .baseUrl(URL_BASE)
+                  .addConverterFactory(GsonConverterFactory.create())
+                  .client(client)
+                  .build();
     }
 }

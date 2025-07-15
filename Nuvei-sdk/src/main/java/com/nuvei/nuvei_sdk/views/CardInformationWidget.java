@@ -246,8 +246,10 @@ public class CardInformationWidget extends LinearLayout {
                 () -> {
                     if(cardBrand.equals("ex") || cardBrand.equals("ak")){
                         fiscalNumberEditText.requestFocus();
+                        fiscalNumberInputLayout.setVisibility(View.VISIBLE);
                     }else{
                         dateEditText.requestFocus();
+                        setEnabled(false);
                     }
 
                     if (cardInputListener != null) {
@@ -289,7 +291,7 @@ public class CardInformationWidget extends LinearLayout {
 
 
 
-
+        fiscalNumberInputLayout.setVisibility(View.GONE);
         adjustViewForPostalCodeAttribute();
         adjustViewForCardHolderNameAttribute();
         adjustViewForScanCardAttribute();
@@ -314,12 +316,13 @@ public class CardInformationWidget extends LinearLayout {
 
 
     @VisibleForTesting
-    CardInformationWidget(Context context, boolean activePostalCode, boolean activeCardHolderName, boolean activeScanCard, boolean activeLogo ){
+    CardInformationWidget(Context context, boolean activePostalCode, boolean activeCardHolderName, boolean activeScanCard, boolean activeLogo, boolean activeFiscalNumber ){
         super(context);
         showCardHolderName = activeCardHolderName;
         showPostalCode = activePostalCode;
         showScanCard = activeScanCard;
         showLogo = activeLogo;
+        showFiscalNumber = activeFiscalNumber;
     }
 
 
@@ -469,7 +472,7 @@ public class CardInformationWidget extends LinearLayout {
                         a.getBoolean(R.styleable.CardMultilineWidget_shouldShowScanCard, false);
                 showLogo =
                         a.getBoolean(R.styleable.CardMultilineWidget_shouldShowPaymentezLogo, true);
-
+                showFiscalNumber = a.getBoolean(R.styleable.CardMultilineWidget_shouldFiscalNumber, false);
                 showPostalCode =
                         a.getBoolean(R.styleable.CardMultilineWidget_shouldShowPostalCode, false);
                 showCardHolderName =
@@ -721,10 +724,10 @@ public class CardInformationWidget extends LinearLayout {
 
     void adjustViewForPostalCodeAttribute() {
         // Set the label/hint to the shorter value if we have three things in a row.
-        @StringRes int expiryLabel = showPostalCode
-                ? R.string.expiry_label_short
-                : R.string.acc_label_expiry_date;
-        dateEditText.setHint(getResources().getString(expiryLabel));
+//        @StringRes int expiryLabel = showPostalCode
+//                ? R.string.expiry_label_short
+//                : R.string.acc_label_expiry_date;
+//        dateEditText.setHint(getResources().getString(expiryLabel));
 
         @IdRes int focusForward = showPostalCode
                 ? R.id.et_add_source_zip_code

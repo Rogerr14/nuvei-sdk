@@ -47,9 +47,9 @@ public class CardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_add_card);
         context = this;
-        getAllCards();
 
 
 
@@ -91,6 +91,7 @@ public class CardActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        getAllCards();
 
     }
 
@@ -105,7 +106,7 @@ public class CardActivity extends AppCompatActivity {
             @Override
             public void onError(ErrorResponse errorResponse) {
                 loading.dismissLoading();
-                Log.v("Error peticicon", errorResponse.getDescription());
+                Log.v("Error peticicon", errorResponse.toString());
                 AlertDialogFragment.ShowErrorDialog(context, "Atención", "Ocurrio un error al realizar esta petición", null);
             }
 

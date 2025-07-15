@@ -20,7 +20,7 @@
     <string name="acc_label_cardholdername">Card Holder\'s Name</string>
     <string name="acc_label_zip">ZIP Code</string>
     <string name="acc_label_cvc">CVC</string>
-    <string name="expiry_date_hint">MM/YY</string>
+    <string name="expiry_date_hint">Month/Year</string>
     <string name="expiry_label_short">Expiry</string>
     <string name="invalid_card_number">Your card\'s number is invalid.</string>
     <string name="invalid_expiry_year">Your card\'s expiration year is invalid.</string>

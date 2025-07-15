@@ -2,6 +2,7 @@ package com.nuvei.nuveisdk;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -40,42 +41,49 @@ public class AddCardActivity extends AppCompatActivity {
             }else{
                 final AlertLoadingFragment loading = new AlertLoadingFragment(context);
                 loading.showLoading();
-                Nuvei.addCard(context, uid, email, cardModel, new iAddCardCallback() {
-                    @Override
-                    public void onError(ErrorResponse error) {
-                        loading.dismissLoading();
-                        buttonSave.setEnabled(true);
-                        AlertDialogFragment.ShowErrorDialog(context, "Error: "+ error.getType(),error.getDescription(), null);
-                    }
+                try {
+                    Nuvei.addCard(context, uid, email, cardModel, new iAddCardCallback() {
+                        @Override
+                        public void onError(ErrorResponse error) {
+                            loading.dismissLoading();
+                            buttonSave.setEnabled(true);
+                            AlertDialogFragment.ShowErrorDialog(context, "Error: "+ error.getType(),error.getDescription(), null);
+                        }
 
-                    @Override
-                    public void onSuccess(CardModel card) {
-                        buttonSave.setEnabled(true);
-                        loading.dismissLoading();
-//                        if(card != null){
-//                            if(card.getStatus().equals("valid")){
-//                                AlertDialogFragment.ShowErrorDialog(context, "Card Successfully Added", "status: " + card.getStatus() + "\n" +
-//                                        "Card Token: " + card.getToken() + "\n" +
-//                                        "transaction_reference: " + card.getTransactionReference(),null);
-//
-//                            }else if(card.getStatus().equals("review")){
-//                                AlertDialogFragment.ShowErrorDialog(
-//                                        context,
-//                                        "Card Under Review",
-//                                        "status: " + card.getStatus() + "\n" +
-//                                                "Card Token: " + card.getToken() + "\n" +
-//                                                "transaction_reference: " + card.getTransactionReference(), null);
-//
-//                            }else{
-//                                AlertDialogFragment.ShowErrorDialog(
-//                                        context,
-//                                        "Error",
-//                                        "status: " + card.getStatus() + "\n" +
-//                                                "message: " + card.getMessage(), null);
-//                            }
-//                        }
-                    }
-                });
+                        @Override
+                        public void onSuccess(CardModel card) {
+                            buttonSave.setEnabled(true);
+                            loading.dismissLoading();
+                        if(card != null){
+                            if(card.getStatus().equals("valid")){
+                                AlertDialogFragment.ShowErrorDialog(context, "Card Successfully Added", "status: " + card.getStatus() + "\n" +
+                                        "Card Token: " + card.getToken() + "\n" +
+                                        "transaction_reference: " + card.getTransactionReference(),()->{
+                                    finish();
+                                });
+
+                            }else if(card.getStatus().equals("review")){
+                                AlertDialogFragment.ShowErrorDialog(
+                                        context,
+                                        "Card Under Review",
+                                        "status: " + card.getStatus() + "\n" +
+                                                "Card Token: " + card.getToken() + "\n" +
+                                                "transaction_reference: " + card.getTransactionReference(), null);
+
+                            }else{
+                                AlertDialogFragment.ShowErrorDialog(
+                                        context,
+                                        "Error",
+                                        "status: " + card.getStatus() + "\n" +
+                                                "message: " + card.getMessage(), null);
+                            }
+                        }
+                        }
+                    });
+                }catch (Exception e){
+                    Log.v("Exception cause by", e.toString());
+                }
+
 
             }
         });

@@ -13,7 +13,7 @@ commons-codec = "1.18.0"
 logging-interceptor = "5.0.0-alpha.16"
 picasso ="2.8"
 iocard = "5.5.1"
-gms ="18.0.1"
+instantapps ="1.1.0"
 
 
 [libraries]
@@ -30,7 +30,8 @@ commons-codec = {module = "commons-codec:commons-codec", version.ref="commons-co
 logging-interceptor = {module="com.squareup.okhttp3:logging-interceptor", version.ref = "logging-interceptor"}
 picasso = {module="com.squareup.picasso:picasso", version.ref="picasso"}
 iocard = {module="io.card:android-sdk", version.ref="iocard"}
-gms ={module="com.google.android.gms:play-services-instantapps", version.ref="gms"}
+instantapps ={module="com.google.android.instantapps:instantapps", version.ref="instantapps"}
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

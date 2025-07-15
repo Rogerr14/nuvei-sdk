@@ -13,7 +13,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 public class NuveiUtils {
 
     public  static String SERVER_DEV_URL = "https://ccapi-stg.paymentez.com/v2/";
-    public  static String SERVER_PROD_URL= "https://ccapi.paymentez.com/v2";
+    public  static String SERVER_PROD_URL= "https://ccapi.paymentez.com/v2/";
 
     private static  String getUniqueToken( String client_key, String time_stamp_auth ){
         String unique_token = client_key +  time_stamp_auth;
@@ -22,6 +22,8 @@ public class NuveiUtils {
 
     public static  String getAuthToken(String key, String code ){
         long time_stamp_time = System.currentTimeMillis()/1000;
+        Log.v("Key", key);
+        Log.v("code", code);
         String time_stamp_string = String.valueOf(time_stamp_time);
         String auth_token = code + ";" + time_stamp_string + ";" + getUniqueToken(key, time_stamp_string);
         Log.v("token", Base64.encodeToString(auth_token.getBytes(), Base64.NO_WRAP));
